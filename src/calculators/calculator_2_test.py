@@ -1,10 +1,26 @@
-from typing import Dict
+from typing import Dict, List
 from .calculator_2 import Calculator2
 from src.drivers.numpy_handler import NumpyHandler
+from src.drivers.interfaces.driver_handler_interface import DriveHandlerInterface
 
 class MockRequest:
     def __init__(self,body: Dict) -> None:
         self.json = body
+
+class MockDriverHandler(DriveHandlerInterface):
+    def standard_derivation(self, numbers: List[float]) -> float:
+        return 3 
+
+#Integração entre NumpyHandler e Calculator2
+def test_calculate_integration():
+    mock_request = MockRequest(body={ "numbers": [1, 2, 3, 4, 5] })
+    
+    driver = NumpyHandler()
+    calculator_2 = Calculator2(driver)
+    formated_response = calculator_2.calculate(mock_request)
+    
+    assert isinstance(formated_response, dict)
+    assert formated_response == {'data': {'Calculator': 2, 'result': 0.08}}
 
 def test_calculate():
     mock_request = MockRequest(body={ "numbers": [1, 2, 3, 4, 5] })
@@ -16,7 +32,7 @@ def test_calculate():
     assert isinstance(formated_response, dict)
     assert formated_response == {'data': {'Calculator': 2, 'result': 0.08}}
 
-
+    
 
 
 
