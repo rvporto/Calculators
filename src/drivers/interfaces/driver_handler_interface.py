@@ -7,4 +7,9 @@ class DriveHandlerInterface(ABC):
     def standard_derivation(self, numbers: List[float]) -> float:
         pass
 
+    @abstractmethod
+    def variance(self, numbers: List[float]) -> float:
+        pass
+    
+
 

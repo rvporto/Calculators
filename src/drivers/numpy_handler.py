@@ -1,5 +1,6 @@
 import numpy
 from typing import List
+from .interfaces.driver_handler_interface import DriverHandlerInterface
 
 class NumpyHandler:
     def __init__(self) -> None:
@@ -7,6 +8,14 @@ class NumpyHandler:
 
     def standard_derivations(self, numbers: List[float]) -> float:
         return self.__np.std(numbers)
+    
+    def variance(self, numbers: List[float]) -> float:
+        return self.__np.var(numbers)
+    
+    
+    
+
+
     
     
     
